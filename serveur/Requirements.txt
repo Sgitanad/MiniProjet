@@ -1,0 +1,3 @@
+# Ce fichier sert à enregistrer les bibliothèques externes dont le projet a besoin.
+# Mais dans notre cas, le projet n'utilise aucune bibliothèque externe.
+# On le laisse donc vide, mais on le garde parce que c’est une bonne pratique.
