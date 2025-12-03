@@ -1,10 +1,10 @@
-from Tache import *
 import json
+from Tache import Tache
 
 class Gestionnaire_Taches:
     def __init__(self):
         self.taches = {}
-        self.compteur = 1  
+        self.compteur = 1
 
     def ajouter_tache(self, titre, description, auteur):
         tache = Tache(self.compteur, titre, description, auteur)
@@ -27,17 +27,11 @@ class Gestionnaire_Taches:
             return True
         return False
 
-  
     def sauvegarder(self, fichier="taches.json"):
-        data = {
-            str(id_tache): self.taches[id_tache].to_dict()
-            for id_tache in self.taches
-        }
-        
+        data = {str(id_tache): self.taches[id_tache].to_dict() for id_tache in self.taches}
         with open(fichier, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
-    
     def charger(self, fichier="taches.json"):
         try:
             with open(fichier, "r", encoding="utf-8") as f:
@@ -45,22 +39,17 @@ class Gestionnaire_Taches:
 
             for id_str, infos in data.items():
                 id_num = int(id_str)
-
                 tache = Tache(
                     infos["id"],
                     infos["titre"],
                     infos["description"],
                     infos["auteur"]
                 )
-
                 tache.statut = infos["statut"]
-
                 self.taches[id_num] = tache
 
-                
                 if id_num >= self.compteur:
                     self.compteur = id_num + 1
 
         except FileNotFoundError:
             pass
-
