@@ -1,0 +1,9 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY . .
+
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+CMD ["python", "client.py"]
